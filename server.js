@@ -33,14 +33,14 @@ app.get('/check', (request,response)=> {
       if (result != null) {
         console.log(result.email);
         if (result.password === request.query.pw) {
-          response.send("Login Successful");
+          response.send("pass");
         }
         else {
-          response.send("Password Does Not Matched");
+          response.send("fail");
         }
       }
       else {
-        response.send("User Name Does Not Matched");
+        response.send("fail");
       }
     }
     finally {
