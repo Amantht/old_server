@@ -17,8 +17,9 @@ client.connect();
 // const col = db.collection("user");
 
 
-var db = client.db("S_16");
+var db = client.db("Rental");
 var col = db.collection("Registration");
+var col1=db.collection("stu_data");
 
 ///registration form data
 app.post('/insert',(request,response) => {
@@ -59,12 +60,27 @@ app.get('/check', (request,response)=> {
 
 // Ex5 form data
 app.post('/insert_stu',(req,res)=>{
-  col =db.collection("Ex5")
+  col1 =db.collection("Ex5")
   console.log(req.body)
-  col.insertOne(req.body)
+  col1.insertOne(req.body)
   res.send(req.body)
 
 })
+app.get('/show_one_stu',(req,res)=>{
+  async function find(){
+    try{
+      const result=await col1.findOne()
+      if(result==null)
+      {
+        res.send({"Data_retrieval":"Fail"})
+      }else{
+          res.send(result);
+        }
+      }
+      finally{}
+    }
+    find().catch(console.dir)
+  })
 app.listen(8081)
 //localhost:8081
 console.log("server started")
